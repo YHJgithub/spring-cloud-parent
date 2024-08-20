@@ -1,5 +1,6 @@
 package com.atguigu.cloud.service.impl;
 
+import com.atguigu.cloud.apis.UserFeignClient;
 import com.atguigu.cloud.entities.User;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.atguigu.cloud.entities.Order;
@@ -22,7 +23,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
     // V1.0版，故意先写死地址
     // public static final String USER_INVOKE_URL = "http://localhost:10100/user/get/";
 
-    //V2.0版，Nacos注册中心上的微服务名称
+    // V2.0版，Nacos注册中心上的微服务名称
     public static final String USER_INVOKE_URL = "http://spzx-cloud-user/user/get/";
 
 
@@ -41,7 +42,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
      * @param orderId
      * @return
      */
-    @Override
+    /* @Override
     public User findOrderOwner(Long orderId) {
         // 根据id查询订单数据
         Order order = orderMapper.selectById(orderId);
@@ -49,7 +50,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         User user = restTemplate.getForObject(USER_INVOKE_URL + order.getUserid(), User.class);
         user.setExtrainfo("订单微服务发起调用，查看本订单属于谁: " + user.getId() + "\t" + user.getUsername());
         return user;
+    } */
+
+    @Resource
+    private UserFeignClient userFeignClient;
+
+    @Override
+    public User findOrderOwner(Long orderId) {
+        // 根据id查询订单数据
+        Order order = orderMapper.selectById(orderId);
+
+        // 发起远程调用
+        User user = userFeignClient.findUserByUserId(order.getUserid());
+
+        return user;
     }
+
 }
 
 

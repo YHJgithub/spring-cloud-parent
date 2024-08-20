@@ -16,6 +16,14 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: full
+            read-timeout: 2000
+            connect-timeout: 2000
+            retryer: com.atguigu.cloud.config.FeignClientRetryer
 
 # 配置mybatis的相关信息
 mybatis-plus:
@@ -24,4 +32,8 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.atguigu.cloud.apis.UserFeignClient: debug
  

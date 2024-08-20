@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 @Slf4j
 public class UserController {
@@ -26,7 +28,11 @@ public class UserController {
     @GetMapping(value = "/user/get/{userId}")
     public User findUserByUserId(@PathVariable(value = "userId") Long userId) {
         System.out.println("********User Module port: " + port);
-
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return userService.getById(userId);
     }
 
@@ -41,5 +47,5 @@ public class UserController {
     public Order getOrderByOrderId(@PathVariable("orderId") Long orderId) {
         return userService.getOrderByOrderId(orderId);
     }
-    
+
 }
