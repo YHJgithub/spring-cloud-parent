@@ -8,10 +8,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
 /**
- * @TableName t_order
+ * @TableName t_user
  */
-@TableName(value = "t_order")
-public class Order implements Serializable {
+@TableName(value = "t_user")
+public class User implements Serializable {
     /**
      * 主键
      */
@@ -19,24 +19,14 @@ public class Order implements Serializable {
     private Long id;
 
     /**
-     * 用户id
+     * 用户名
      */
-    private Long userid;
+    private String username;
 
     /**
-     * 订单名
+     * 用户地址
      */
-    private String name;
-
-    /**
-     * 金额
-     */
-    private Integer price;
-
-    /**
-     * 数量
-     */
-    private Integer num;
+    private String address;
 
     /**
      * 额外信息说明
@@ -61,59 +51,31 @@ public class Order implements Serializable {
     }
 
     /**
-     * 用户id
+     * 用户名
      */
-    public Long getUserid() {
-        return userid;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * 用户id
+     * 用户名
      */
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * 订单名
+     * 用户地址
      */
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
     /**
-     * 订单名
+     * 用户地址
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * 金额
-     */
-    public Integer getPrice() {
-        return price;
-    }
-
-    /**
-     * 金额
-     */
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    /**
-     * 数量
-     */
-    public Integer getNum() {
-        return num;
-    }
-
-    /**
-     * 数量
-     */
-    public void setNum(Integer num) {
-        this.num = num;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     /**
@@ -141,12 +103,10 @@ public class Order implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Order other = (Order) that;
+        User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getUserid() == null ? other.getUserid() == null : this.getUserid().equals(other.getUserid()))
-                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-                && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
-                && (this.getNum() == null ? other.getNum() == null : this.getNum().equals(other.getNum()))
+                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+                && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
                 && (this.getExtrainfo() == null ? other.getExtrainfo() == null : this.getExtrainfo().equals(other.getExtrainfo()));
     }
 
@@ -155,10 +115,8 @@ public class Order implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUserid() == null) ? 0 : getUserid().hashCode());
-        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
-        result = prime * result + ((getNum() == null) ? 0 : getNum().hashCode());
+        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
+        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
         result = prime * result + ((getExtrainfo() == null) ? 0 : getExtrainfo().hashCode());
         return result;
     }
@@ -170,10 +128,8 @@ public class Order implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", userid=").append(userid);
-        sb.append(", name=").append(name);
-        sb.append(", price=").append(price);
-        sb.append(", num=").append(num);
+        sb.append(", username=").append(username);
+        sb.append(", address=").append(address);
         sb.append(", extrainfo=").append(extrainfo);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
