@@ -20,7 +20,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         implements OrderService {
 
     // V1.0版，故意先写死地址
-    public static final String USER_INVOKE_URL = "http://localhost:10100/user/get/";
+    // public static final String USER_INVOKE_URL = "http://localhost:10100/user/get/";
+
+    //V2.0版，Nacos注册中心上的微服务名称
+    public static final String USER_INVOKE_URL = "http://spzx-cloud-user/user/get/";
+
 
     @Resource
     private OrderMapper orderMapper;

@@ -1,5 +1,6 @@
 package com.atguigu.cloud.controller;
 
+import com.atguigu.cloud.entities.Order;
 import com.atguigu.cloud.entities.User;
 import com.atguigu.cloud.service.UserService;
 import jakarta.annotation.Resource;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 public class UserController {
-    
+
     @Value("${server.port}")
     private String port;
 
@@ -29,4 +30,16 @@ public class UserController {
         return userService.getById(userId);
     }
 
+    /**
+     * 用户微服务发起跨服务调用订单微服务，按照订单流水查询订单信息
+     * http://localhost:10100/user/consumer/1
+     *
+     * @param orderId
+     * @return
+     */
+    @GetMapping(value = "/user/consumer/{orderId}")
+    public Order getOrderByOrderId(@PathVariable("orderId") Long orderId) {
+        return userService.getOrderByOrderId(orderId);
+    }
+    
 }

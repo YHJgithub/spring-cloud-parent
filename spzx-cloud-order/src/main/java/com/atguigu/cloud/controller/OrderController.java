@@ -23,9 +23,11 @@ public class OrderController {
     }
 
     @GetMapping(value = "/order/get/{orderId}")
-    public Order findUserByOrderId(@PathVariable(value = "orderId") Long orderId) {
-        System.out.println("********Order Module port: " + port);
-        return orderService.getById(orderId);
+    public Order findOrderByOrderId(@PathVariable("orderId") Long orderId) {
+        System.out.println("----Order Module port: " + port);
+        Order retValue = orderService.getById(orderId);
+        retValue.setExtrainfo(retValue.getExtrainfo() + " \t 服务端口:" + port);
+        return retValue;
     }
 
     /**
